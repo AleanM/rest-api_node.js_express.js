@@ -1,0 +1,8 @@
+{
+    "secretKey": "YOUR_SECRET_KEY",
+    "PORT": "3000",
+    "host_name": "YOUR_MYSQL_USERNAME_DB",
+    "host_password": "YOUR_MYSQL_USERPASSWORD_DB",
+    "host_db": "YOUR_MYSQL_NAME_DB",
+    "upload_dir": "YOUR_NAME_DIRECTORY_FOR_FILES"
+}
