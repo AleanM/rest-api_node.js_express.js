@@ -55,16 +55,28 @@ node index.js
 
 Список маршрутов (Routes List):
 AUTH
+
 auth/signup POST - создание пользователя, необходимо указать "email" и "password" в передаваемом json объекте. При успехе вернёт пару Токенов и время действия Access токена.
+
 auth/signin POST - вход пользователя, необходимо указать "email" и "password" в передаваемом json объекте. При успехе обновит пару Токенов и время действия Access токена.
+
 auth/signin/new_token POST - обновление Access токена, необходимо указать "email" в передаваемом json объекте и в request headers Authorization Bearer token - Refresh token. При успехе обновит сам Access токен и его время действие.
+
 auth/info GET - информацию о пользователе, а именно его почту/логин, необходимо указать в request headers Authorization Bearer token - Access token. При успехе выведет json объект с email/логином пользователя.
+
 auth/logout GET - выход из уч.записи пользователя, необходимо ввести в request headers Authorization Bearer token - Access token. При успехе выведет "Logged out successfully".
 
+
 FILES
+
 files/file/upload POST - загружает в созданную вами папку "upload_dir" любой указанный файл и добавляет о нём информацию в БД, необходимо выбрать form-data как вид передаваемого сообщения и выбрать в Key тип File вводите в поле Key - file, далее выбираете file который хотите загрузить отправляете. При успехе в папке "upload_dir" с вашим названием появится файл, а также выведет "File uploaded successfully".
+
 files/file/list GET - Выводит всю информацию о загруженных файлах, ничего не нужно вводите просто отправляете запрос. При успехе выведет информацию о загруженных файлах.
+
 files/file/delete/:id DELETE - Удаляет необходимый файл по указанному id, необходимо в маршруте указать id файла. При успехе выведет "File deleted successfully"
+
 files/file/:id GET - Выводит информацию по определенному файлу выбранному по введённому id в маршруте. При успехе выведет информацию по данному файлу.
+
 files/file/download/:id GET - Скачивает файл по выбранный файл по введенному id в маршруте и необходимо выбрать не Send, а Send and Download. При успехе скачает файл и вы сохраните в любое место на диске.
+
 filest/file/update/:id PUT - Заменяет выбранный вами файл, на файл ранее загруженный в папке "upload_dir" по выбранному id пользователя в маршруте. При успехе заменит файл и обновит запись в БД, а также выведет "File updated successfully".
