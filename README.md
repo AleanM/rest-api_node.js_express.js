@@ -23,6 +23,7 @@ npm i
 Имя можете использовать любое. Для корректной работы нам понадобится создать две таблицы в БД. 
 1.users - для взаимодействия с пользователем (создание, вход, вывод информации и др.).
 Создаётся следующей командой:
+
 CREATE TABLE users (
   id INT PRIMARY KEY AUTO_INCREMENT,
   email VARCHAR(255) UNIQUE,
@@ -37,6 +38,7 @@ CREATE TABLE users (
 
 2.files - для взаимодействия с файлами (загрузка, изменение, удаление и др.).
 Создаётся следующей командой:
+
 CREATE TABLE files (
   id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(255),
