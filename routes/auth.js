@@ -95,8 +95,8 @@ db.query('SELECT * FROM users WHERE refresh_token = ?', [token], (error, results
   const newAuthToken = jwt.sign(user, jwtSecretKey, { expiresIn: '10m' });
   const newRefreshToken = jwt.sign(user, jwtSecretKey, { expiresIn: '7d' });
 
-  const accessExpiresAt = Math.floor(Date.now() / 1000) + timelife_access_token;
-  const refreshExpiresAt = Math.floor(Date.now() / 1000) + timelife_refresh_token;
+  const accessExpiresAt = Math.floor(Date.now() / 1000) + (timelife_access_token);
+  const refreshExpiresAt = Math.floor(Date.now() / 1000) + (timelife_refresh_token);
 
   db.query(
     'UPDATE users SET access_token = ?, access_token_expiresAt = ?, refresh_token = ?, refresh_token_expiresAt = ? WHERE refresh_token = ?',
