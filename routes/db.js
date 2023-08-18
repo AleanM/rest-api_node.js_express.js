@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const configData = require('./config.json');
+const configData = require('../config.json');
 
 const db = mysql.createConnection({
   host: 'localhost',
