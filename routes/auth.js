@@ -7,6 +7,10 @@ const configData = require('./config.json');
 
 const jwtSecretKey = configData.secretKey; 
 
+const timelife_access_token = 600 // 10 min
+
+const timelife_refresh_token = 604800 // 7 days
+
 router.post('/signin', (req, res) => {
     const postData = req.body;
   
@@ -40,9 +44,9 @@ router.post('/signin', (req, res) => {
       const refreshToken = jwt.sign(user, jwtSecretKey, { expiresIn: '7d' });
   
       
-      const accessExpiresAt = Math.floor(Date.now() / 1000) + (10 * 60); 
+      const accessExpiresAt = Math.floor(Date.now() / 1000) + (timelife_access_token); 
   
-      const refreshExpiresAt = Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60); 
+      const refreshExpiresAt = Math.floor(Date.now() / 1000) + (timelife_refresh_token); 
   
   
       db.query('UPDATE users SET refresh_token = ?, access_token = ?, access_token_expiresAt = ?, refresh_token_expiresAt = ? WHERE email = ?',
@@ -91,8 +95,8 @@ db.query('SELECT * FROM users WHERE refresh_token = ?', [token], (error, results
   const newAuthToken = jwt.sign(user, jwtSecretKey, { expiresIn: '10m' });
   const newRefreshToken = jwt.sign(user, jwtSecretKey, { expiresIn: '7d' });
 
-  const accessExpiresAt = Math.floor(Date.now() / 1000) + 10 * 60;
-  const refreshExpiresAt = Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60;
+  const accessExpiresAt = Math.floor(Date.now() / 1000) + timelife_access_token;
+  const refreshExpiresAt = Math.floor(Date.now() / 1000) + timelife_refresh_token;
 
   db.query(
     'UPDATE users SET access_token = ?, access_token_expiresAt = ?, refresh_token = ?, refresh_token_expiresAt = ? WHERE refresh_token = ?',
@@ -135,9 +139,9 @@ router.post('/signup', (req, res) => {
       
       const refreshToken = jwt.sign(user, jwtSecretKey, { expiresIn: '7d' });
   
-      const accessExpiresAt = Math.floor((Date.now() / 1000) + (10 * 60));
+      const accessExpiresAt = Math.floor((Date.now() / 1000) + (timelife_access_token));
   
-      const refreshExpiresAt = Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60); 
+      const refreshExpiresAt = Math.floor(Date.now() / 1000) + (timelife_refresh_token); 
   
       db.query('INSERT INTO users (email, password, refresh_token, access_token, access_token_expiresAt, refresh_token_expiresAt) VALUES (?, ?, ?, ?, ?, ?)', [postData.email, hashedPassword, refreshToken, authToken, accessExpiresAt, refreshExpiresAt], (error) => {
         if (error) {
@@ -200,9 +204,9 @@ router.get('/logout', (req, res) => {
     
       const refreshToken = jwt.sign({email}, jwtSecretKey, { expiresIn: '7d' });
   
-      const accessExpiresAt = Math.floor(Date.now() / 1000) + (10 * 60); 
+      const accessExpiresAt = Math.floor(Date.now() / 1000) + (timelife_access_token); 
   
-      const refreshExpiresAt = Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60); 
+      const refreshExpiresAt = Math.floor(Date.now() / 1000) + (timelife_refresh_token); 
   
       
       db.query('UPDATE users SET access_token = ?, access_token_expiresAt = ?, refresh_token = ?, refresh_token_expiresAt = ? WHERE email = ?',
