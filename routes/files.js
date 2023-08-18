@@ -4,7 +4,7 @@ const multer = require('multer');
 const db = require('./db'); 
 const path = require('path');
 const fs = require('fs');
-const configData = require('./config.json');
+const configData = require('../config.json');
 
 
 

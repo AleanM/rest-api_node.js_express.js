@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const db = require('./db');
-const configData = require('./config.json');
+const configData = require('../config.json');
 
 const jwtSecretKey = configData.secretKey; 
 
